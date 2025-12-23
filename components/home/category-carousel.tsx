@@ -89,7 +89,7 @@ export function CategoryCarousel() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold">Explore Menu</h2>
         <Link
-          href="/menu"
+          href="/profile"
           className="text-brand-600 font-semibold hover:underline text-sm"
         >
           VIEW ALL
@@ -114,7 +114,7 @@ export function CategoryCarousel() {
           {categories.map((cat) => (
             <Link
               key={cat.id}
-              href={`/menu#${cat.id}`}
+              href="/profile"
               className="w-[240px] h-[300px] flex-shrink-0 rounded-2xl overflow-hidden relative group shadow-lg border-2 border-transparent hover:border-brand-200 transition-all duration-200"
               style={{ scrollSnapAlign: "start" }}
             >

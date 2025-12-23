@@ -19,7 +19,7 @@ export default function MainLayout({
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const footerRef = useRef<HTMLElement | null>(null);
 
-  const isMenuPage = pathname.startsWith("/menu");
+  const isProfilePage = pathname.startsWith("/profile");
   const isHomePage = pathname === "/";
 
   useEffect(() => {
@@ -44,19 +44,14 @@ export default function MainLayout({
     <OrderTypeDialogProvider>
       <Navbar />
 
-      <main
-        className={cn(
-          "flex-grow",
-          isHomePage ? "pt-0" : "pt-14 sm:pt-16"
-        )}
-      >
+      <main className={cn("flex-grow", isHomePage ? "pt-0" : "pt-14 sm:pt-16")}>
         {children}
       </main>
 
       <Footer />
 
-      {!isMenuPage && (
-        <Link href="/menu">
+      {!isProfilePage && (
+        <Link href="/profile">
           <Button
             size="lg"
             className={`fixed bottom-4 md:bottom-6 z-50 shadow-2xl hover:scale-105 transition-all duration-300 bg-brand-600 hover:bg-brand-600 text-white px-4 py-4 md:px-6 md:py-6 rounded-full flex items-center gap-2 md:gap-3 ${

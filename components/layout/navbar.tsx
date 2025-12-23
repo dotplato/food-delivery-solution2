@@ -16,17 +16,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { PointsDisplay } from "./points-display";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [userRole, setUserRole] = useState<string>("customer");
   const pathname = usePathname();
-  const { items } = useCart();
   const { user, signOut } = useAuth();
-  const supabase = createClientComponentClient();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -36,47 +31,15 @@ export function Navbar() {
     document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
 
-  // Fetch user role from Supabase
-  useEffect(() => {
-    async function checkUserRole() {
-      if (!user) {
-        setIsAdmin(false);
-        setUserRole("customer");
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("is_admin, role")
-          .eq("id", user.id)
-          .maybeSingle();
-
-        if (error) throw error;
-
-        setIsAdmin(data?.is_admin || false);
-        setUserRole(data?.role || "customer");
-      } catch (err) {
-        console.error("Error fetching user role:", err);
-        setIsAdmin(false);
-        setUserRole("customer");
-      }
-    }
-
-    checkUserRole();
-  }, [user, supabase]);
-
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/menu", label: "Menu" },
+    { href: "/profile", label: "Menu" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
 
   const isActive = (path: string) =>
     path === "/" ? pathname === "/" : pathname.startsWith(path);
-
-  const totalItems = items?.length || 0;
 
   return (
     <>
@@ -147,50 +110,20 @@ export function Navbar() {
             />
           </Link>
 
-          {/* Right - Cart, Points, Auth */}
+          {/* Right - Cart, Auth */}
           <div className="flex items-center gap-2">
-            <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative">
+            <a href="/profile#/cart">
+              <Button variant="ghost" size="icon">
                 <ShoppingCart />
-                {totalItems > 0 && (
-                  <Badge className="absolute -top-1 -right-1">{totalItems}</Badge>
-                )}
               </Button>
-            </Link>
-
-            <PointsDisplay />
+            </a>
 
             {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <User />
-                  </Button>
-                </DropdownMenuTrigger>
-
-                <DropdownMenuContent align="end" className="z-[9999]">
-                  <DropdownMenuItem asChild>
-                    <Link href="/profile">My Profile</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/orders">My Orders</Link>
-                  </DropdownMenuItem>
-
-                  {(userRole === "admin" || userRole === "staff") && (
-                    <DropdownMenuItem asChild>
-                      <Link href="/kitchen">Kitchen Dashboard</Link>
-                    </DropdownMenuItem>
-                  )}
-
-                  {isAdmin && (
-                    <DropdownMenuItem asChild>
-                      <Link href="/admin">Admin Dashboard</Link>
-                    </DropdownMenuItem>
-                  )}
-
-                  <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <a href="/profile#/profile">
+                <Button variant="ghost" size="icon">
+                  <User />
+                </Button>
+              </a>
             ) : (
               <Link href="/signin">
                 <Button variant="outline">Sign In</Button>
