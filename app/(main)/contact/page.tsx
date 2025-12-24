@@ -21,7 +21,7 @@ export default function ContactPage() {
               <div className="ml-4">
                 <h3 className="font-medium">Address</h3>
                 <p className="text-muted-foreground">
-                  123 Burger Street, Foodville, NY 10001
+10 Stephenson Place, Chesterfield, Chesterfield, S40 1XL
                 </p>
               </div>
             </div>
@@ -29,14 +29,14 @@ export default function ContactPage() {
               <Phone className="h-5 w-5 text-red-600 mt-1 flex-shrink-0" />
               <div className="ml-4">
                 <h3 className="font-medium">Phone</h3>
-                <p className="text-muted-foreground">(123) 456-7890</p>
+                <p className="text-muted-foreground">01246461825</p>
               </div>
             </div>
             <div className="flex items-start">
               <Mail className="h-5 w-5 text-red-600 mt-1 flex-shrink-0" />
               <div className="ml-4">
                 <h3 className="font-medium">Email</h3>
-                <p className="text-muted-foreground">info@BunhubBurger.com</p>
+                <p className="text-muted-foreground">burger@bunhub.net</p>
               </div>
             </div>
             <div className="flex items-start">

@@ -2,7 +2,6 @@
 
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { OrderTypeDialogProvider } from "@/components/location/OrderTypeDialogProvider";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
@@ -41,7 +40,7 @@ export default function MainLayout({
   }, [pathname]);
 
   return (
-    <OrderTypeDialogProvider>
+    <>
       <Navbar />
 
       <main className={cn("flex-grow", isHomePage ? "pt-0" : "pt-14 sm:pt-16")}>
@@ -65,6 +64,6 @@ export default function MainLayout({
           </Button>
         </Link>
       )}
-    </OrderTypeDialogProvider>
+</>
   );
 }

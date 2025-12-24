@@ -6,7 +6,6 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, ShoppingCart, User, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/auth-context";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +18,6 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { user, signOut } = useAuth();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -116,7 +114,6 @@ export function Navbar() {
               </Button>
             </a>
 
-            {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon">
@@ -146,15 +143,10 @@ export function Navbar() {
                     Delivery Addresses
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>
+                  <DropdownMenuItem >Sign Out</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <Link href="/signin">
-                <Button variant="outline">Sign In</Button>
-              </Link>
-            )}
-          </div>
+         </div>
         </div>
       </header>
     </>

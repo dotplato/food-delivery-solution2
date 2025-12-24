@@ -139,72 +139,50 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="text-center mb-16">
-          <h2 className="text-2xl font-bold mb-4">Our Team</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Meet the passionate people behind your favorite burgers
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div>
-              <div className="relative h-64 mb-4 rounded-lg overflow-hidden">
-                <Image
-                  src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg"
-                  alt="John Miller, Founder & Head Chef"
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              </div>
-              <h3 className="font-semibold text-lg">John Miller</h3>
-              <p className="text-muted-foreground">Founder & Head Chef</p>
+        <section className="py-12 md:py-20 mb-28">
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="rounded-2xl overflow-hidden text-center">
+              <Image
+                src="/images/taste 1x1.png"
+                alt="How it works step 1"
+                width={2880}
+                height={2880}
+                className="w-full h-auto object-cover rounded-2xl"
+                priority
+              />
+              <p className="mt-4 text-lg md:text-xl font-medium">
+                Big burgers. Bold flavours. Zero compromises.
+              </p>
             </div>
 
-            <div>
-              <div className="relative h-64 mb-4 rounded-lg overflow-hidden">
-                <Image
-                  src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
-                  alt="Sarah Miller, Co-Founder"
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              </div>
-              <h3 className="font-semibold text-lg">Sarah Miller</h3>
-              <p className="text-muted-foreground">Co-Founder</p>
+            <div className="rounded-2xl overflow-hidden text-center">
+              <Image
+                src="/images/gowing 1x1.png"
+                alt="How it works step 2"
+                width={2880}
+                height={2880}
+                className="w-full h-auto object-cover rounded-2xl"
+              />
+              <p className="mt-4 text-lg md:text-xl font-medium">
+                Born in Chesterfield, built on pure flavour.
+              </p>
             </div>
 
-            <div>
-              <div className="relative h-64 mb-4 rounded-lg overflow-hidden">
-                <Image
-                  src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg"
-                  alt="Michael Johnson, Operations Manager"
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              </div>
-              <h3 className="font-semibold text-lg">Michael Johnson</h3>
-              <p className="text-muted-foreground">Operations Manager</p>
-            </div>
-
-            <div>
-              <div className="relative h-64 mb-4 rounded-lg overflow-hidden">
-                <Image
-                  src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg"
-                  alt="Emily Chen, Head of Customer Experience"
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              </div>
-              <h3 className="font-semibold text-lg">Emily Chen</h3>
-              <p className="text-muted-foreground">
-                Head of Customer Experience
+            <div className="rounded-2xl overflow-hidden text-center">
+              {/* Third image – same layout, replace src when provided */}
+              <Image
+                src="/images/delivery 1x1.png"
+                alt="How it works step 3"
+                width={2880}
+                height={2880}
+                className="w-full h-auto object-cover rounded-2xl"
+              />
+              <p className="mt-4 text-lg md:text-xl font-medium">
+                Fresh off the grill, fast to your door.
               </p>
             </div>
           </div>
-        </div>
+        </section>
 
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">
@@ -216,7 +194,7 @@ export default function AboutPage() {
           <Button
             asChild
             size="lg"
-            className="bg-red-600 hover:bg-red-700 rounded-full px-8"
+            className="bg-brand-600 hover:bg-brand-700 rounded-full px-8"
           >
             <Link href="/menu">Browse Our Menu</Link>
           </Button>
