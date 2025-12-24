@@ -8,8 +8,8 @@ export function OrderTypeDialogProvider({ children }: { children: React.ReactNod
   const pathname = usePathname();
 
   useEffect(() => {
-    // Don't show dialog on auth pages, checkout, cart, or admin pages
-    const excludedPaths = ['/signin', '/signup', '/checkout', '/cart', '/admin', '/kitchen', '/order-success', '/profile', '/orders'];
+    // Don't show dialog on auth pages, checkout, cart, or menu pages
+    const excludedPaths = ['/signin', '/signup', '/checkout', '/cart', '/order-success', '/menu', '/orders'];
     const shouldExclude = excludedPaths.some(path => pathname?.startsWith(path));
     
     if (typeof window !== 'undefined' && !shouldExclude) {

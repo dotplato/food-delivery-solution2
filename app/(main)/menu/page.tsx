@@ -1,24 +1,30 @@
-import { Suspense } from "react";
-import Loader from "@/components/ui/loader";
-import { fetchMenuData } from "@/lib/fetch/menu-data";
-import { MenuPageClient } from "@/components/menu/menu-page-client";
+"use client";
 
-export const metadata = {
-  title: "Menu | Bunhub Burger",
-  description: "Browse our delicious menu of burgers, sides, and drinks",
-};
+import { useEffect } from "react";
 
-export const revalidate = 60; // Cache for 1 minute (ISR)
+export default function MenuPage() {
+  useEffect(() => {
+    // Check if script already exists - if it does, skip loading
+    if (document.getElementById("flipdish-script")) {
+      return;
+    }
 
-export default async function MenuPage() {
-  const data = await fetchMenuData();
+    // Load Flipdish script
+    const script = document.createElement("script");
+    script.id = "flipdish-script";
+    script.type = "text/javascript";
+    script.charset = "UTF-8";
+    script.src =
+      "https://web-order.flipdish.co/client/productionwlbuild/latest/static/js/main.js";
+    script.async = true;
+    
+    document.head.appendChild(script);
+  }, []);
 
   return (
-    <div className="pt-16 pb-16">
+    <div className="pt-16 pb-16 min-h-screen">
       <div className="container mx-auto px-4">
-        <Suspense fallback={<Loader />}>
-          <MenuPageClient data={data} />
-        </Suspense>
+        <div id="flipdish-menu" data-offset="0" data-restaurant="br12881"></div>
       </div>
     </div>
   );

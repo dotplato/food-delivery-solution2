@@ -3,20 +3,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, ShoppingCart, User, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/context/cart-context";
 import { useAuth } from "@/context/auth-context";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +31,7 @@ export function Navbar() {
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/profile", label: "Menu" },
+    { href: "/menu", label: "Menu" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -112,18 +110,45 @@ export function Navbar() {
 
           {/* Right - Cart, Auth */}
           <div className="flex items-center gap-2">
-            <a href="/profile#/cart">
+            <a href="/menu#/cart">
               <Button variant="ghost" size="icon">
                 <ShoppingCart />
               </Button>
             </a>
 
             {user ? (
-              <a href="/profile#/profile">
-                <Button variant="ghost" size="icon">
-                  <User />
-                </Button>
-              </a>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <User />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="z-[300]">
+                  <DropdownMenuItem
+                    onClick={() => {
+                      window.location.href = "/menu#/history";
+                    }}
+                  >
+                    Previous Orders
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      window.location.href = "/menu#/account/payment-methods";
+                    }}
+                  >
+                    Payment Methods
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      window.location.href = "/menu#/delivery";
+                    }}
+                  >
+                    Delivery Addresses
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <Link href="/signin">
                 <Button variant="outline">Sign In</Button>
